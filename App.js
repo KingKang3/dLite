@@ -68,7 +68,7 @@ const RootStack = createStackNavigator(
     },
   },
   {
-    initialRouteName: 'SignUpRecord',
+    initialRouteName: 'ClubModify',
     transitionConfig: (nav) => handleCustomTransition(nav)
   },
   

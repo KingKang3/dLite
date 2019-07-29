@@ -5,6 +5,20 @@ import {Icon} from 'react-native-elements';
 
 class CharGoal extends Component {
 
+
+    constructor(props){
+        super(props);
+        this.state = {
+          disabled: true,
+        }
+      }
+       
+    
+    Press = () => {
+      this.state.disabled == true ? this.setState({disabled:false}) : this.setState({disabled:true})
+    }
+
+
     render() {
         return (
             <>
@@ -12,9 +26,16 @@ class CharGoal extends Component {
                 {
                     this.props.chars.map((data,index,chars) => (
                         <View key={index} >
-                            <TouchableOpacity style={styles.button}>
+                            {
+                                (this.state.disabled == true)?
+                            <TouchableOpacity onPress={this.Press} style={styles.button}>
                                 <Text style={{color:'#3B3B3B'}}>{data.text}</Text>
-                                <TouchableOpacity style={styles.icon} onPress={this.props.removeChar.bind(this, index)}>
+                                
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity style={styles.button} onPress={this.Press}>
+                            <Text style={{color:'white'}}>{data.text}</Text>
+                            <TouchableOpacity style={{position: 'absolute'}} onPress={this.props.removeChar.bind(this, index)}>
                                     <Icon
                                         reverse
                                         size={10}
@@ -24,7 +45,7 @@ class CharGoal extends Component {
                                         />
                             </TouchableOpacity>
                             </TouchableOpacity>
-                            
+                            }
                         </View> 
 
                     ))
@@ -67,10 +88,7 @@ const styles = StyleSheet.create({
         alignItems: "flex-start",
         marginTop:20
       },
-      icon:{
-        left: 10,
-        paddingRight:5
-      }
+    
     });
 
     export default CharGoal;

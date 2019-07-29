@@ -3,8 +3,11 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
+  Dimensions
 } from 'react-native';
 import { scale, moderateScale, verticalScale} from '../components/Scaling';
+
+const { width, height } = Dimensions.get("window");
 
 export default class ConfirmButton extends Component{
   static defaultProps = {
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 10,
     borderRadius: 15,
-    height: 50,
+    height: height*0.07,
     shadowColor: 'rgba(0,0,0, .4)', // IOS
     shadowOffset: { height: 1, width: 1 }, // IOS
     shadowOpacity: 1, // IOS

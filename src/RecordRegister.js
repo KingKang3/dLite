@@ -56,62 +56,66 @@ export default class RecordRegister extends React.Component {
 				{isGetting == false && this.props.navigation.getParam('to', 'NO-ID') == 'm' ? (
 					<ActivityIndicator size="large" style={styles.activityIndicator} />
 				) : (
-					<>
-					 <TouchableOpacity style={{position: 'absolute', width:width*0.2, height:30, top:20,left:10, zIndex:1}} 
-					 				   onPress={() => { this.props.navigation.goBack() }}>
-											<Ionicons name="ios-arrow-back" size={28} color="black" />
-											</TouchableOpacity>
-											
-						<HeaderScrollView 
-						scrollEnabled={false}
-						fadeDirection="up"
-						title="기록 생성">
-							<View style={styles.container}>
-								{/* <KeyboardAvoidingView
+						<>
+							<TouchableOpacity style={{ position: 'absolute', width: width * 0.2, height: height * 0.1, top: 15, left: 10, zIndex: 1 }}
+								onPress={() => { this.props.navigation.goBack() }}>
+								<Ionicons name="ios-arrow-back" size={width * 0.08} color="black" />
+							</TouchableOpacity>
+
+							<HeaderScrollView
+								headerContainerStyle={{height:height * 0.08, }}
+								headlineStyle={{paddingTop:23, textAlign:'center',justifyContent:'center', alignItems:'center', alignSelf:'center',fontSize:width*0.05,  }}
+								headerComponentContainerStyle={{justifyContent:'center', height:height * 0.08, }}
+								titleStyle={{fontSize:width*0.08}}
+								scrollEnabled={false}
+								fadeDirection="up"
+								title="기록 생성">
+								<View style={styles.container}>
+									{/* <KeyboardAvoidingView
 									behavior="padding"
 									keyboardVerticalOffset={Platform.OS === 'ios' ? '200' : '10'}
 								> */}
-								{/* 밑에 완료버튼 빼고 나머지 화면 스크롤 */}
+									{/* 밑에 완료버튼 빼고 나머지 화면 스크롤 */}
 
-								{/* 맨 위 활동 내용 적는 곳 */}
+									{/* 맨 위 활동 내용 적는 곳 */}
 
-								{/* 사진 넣는 곳 */}
-								{Object.values(images).map(image => (
-									<PhotoModify
-										key={image.id}
-										deleteImage={this._deleteImage}
-										updateImage={this._updateImage}
-										updateComment={this._updateComment}
-										{...image}
-									/>
-								))}
-								<PhotoRegister addImage={this._addImage} />
+									{/* 사진 넣는 곳 */}
+									{Object.values(images).map(image => (
+										<PhotoModify
+											key={image.id}
+											deleteImage={this._deleteImage}
+											updateImage={this._updateImage}
+											updateComment={this._updateComment}
+											{...image}
+										/>
+									))}
+									<PhotoRegister addImage={this._addImage} />
 
-								{/* 완료버튼 */}
-								{/* </KeyboardAvoidingView> */}
-							</View>
-							<View style={{height:80}}/>
-						</HeaderScrollView>
+									{/* 완료버튼 */}
+									{/* </KeyboardAvoidingView> */}
+								</View>
+								<View style={{ height: 80 }} />
+							</HeaderScrollView>
 
 
-						
-						<View style={styles.footer}>
-							{this.state.count === 0 ? (
-								<ConfirmButtonN title={'사진을 넣어주세요.'} />
-							) : (
-								<TouchableOpacity style={{width:'100%'}} onPress={this._ButtonPress}>
-									{this.state.isSubmitting ? (
-										<ConfirmButton title={'로딩'} />
-									) : (
-										<ConfirmButton
-										
-										title={'확인'} />
+
+							<View style={styles.footer}>
+								{this.state.count === 0 ? (
+									<ConfirmButtonN title={'사진을 넣어주세요.'} />
+								) : (
+										<TouchableOpacity style={{ width: '100%' }} onPress={this._ButtonPress}>
+											{this.state.isSubmitting ? (
+												<ConfirmButton title={'로딩'} />
+											) : (
+													<ConfirmButton
+
+														title={'확인'} />
+												)}
+										</TouchableOpacity>
 									)}
-								</TouchableOpacity>
-							)}
-						</View>
-					</>
-				)}
+							</View>
+						</>
+					)}
 			</>
 		);
 	}
@@ -196,7 +200,7 @@ export default class RecordRegister extends React.Component {
 			.post('http://dkstkdvkf00.cafe24.com/GetRecordPictureM.php', {
 				recordNo: recordNo,
 			})
-			.then(function(response) {
+			.then(function (response) {
 				t._setDatas(response);
 			});
 
@@ -340,17 +344,19 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 	},
 	footer: {
-		flex:1,
-		position:'absolute',
-		alignItems:'center',
-		bottom:0,
-		width:"100%",
-		textAlign:'center',
+		flex: 1,
+		position: 'absolute',
+		alignItems: 'center',
+		bottom: 0,
+		width: "100%",
+		textAlign: 'center',
 		// backgroundColor: '#1ad657',
-		paddingTop: 10,
+		paddingBottom: height*0.01,
 		alignSelf: 'center',
-		backgroundColor:'white'
-	  },
+		backgroundColor: 'white',
+		paddingHorizontal: width * 0.03,
+		
+	},
 	button: {
 		flex: 1,
 		backgroundColor: '#50C8FF',
